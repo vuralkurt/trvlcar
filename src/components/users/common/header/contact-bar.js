@@ -20,7 +20,7 @@ const ContactBar = () => {
       <li>
         <RiMapPinLine />
         <div>
-          sjkhsdjfhsjkdfhksdf
+         Cherry Tree Ct,Jacksonville,32216
           <br />
           Florida USA
         </div>
