@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container,Row,Col} from "react-bootstrap"
+import { Col, Container, Row } from 'react-bootstrap'
 import ContactBar from './contact-bar'
 import SocialBar from './social-bar'
 import "./top-bar.css";
@@ -12,7 +12,6 @@ const TopBar = () => {
                 <Col lg={3} className="d-none d-lg-block"><SocialBar/></Col>
                 <Col lg={9}><ContactBar/></Col>
             </Row>
-
         </Container>
     </div>
   )

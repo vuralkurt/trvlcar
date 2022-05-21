@@ -5,6 +5,7 @@ import logo from "../../../../assets/img/logo/logo.png";
 import ContactBar from "../header/contact-bar";
 import SocialBar from "../header/social-bar";
 import "./footer.css";
+
 const Footer = () => {
   return (
     <section className="footer">
@@ -46,4 +47,5 @@ const Footer = () => {
     </section>
   );
 };
+
 export default Footer;

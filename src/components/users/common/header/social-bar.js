@@ -7,8 +7,8 @@ import {
   RiLinkedinFill,
 } from "react-icons/ri";
 
+
 const SocialBar = () => {
-  
   return (
     <ul className="social-bar">
       <li>
@@ -39,4 +39,5 @@ const SocialBar = () => {
     </ul>
   );
 };
+
 export default SocialBar;

@@ -2,11 +2,14 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 import "./slider.css";
 import slides from "./slider.json";
+
 const Slider = () => {
   return (
     <Carousel fade className="slider">
       {slides.map((slide, index) => {
+
         let image = require(`../../../../assets/img/slider/${slide.image}`);
+
         return (
           <Carousel.Item
             key={index}
@@ -22,4 +25,5 @@ const Slider = () => {
     </Carousel>
   );
 };
+
 export default Slider;

@@ -7,6 +7,7 @@
     position: relative;
     color: rgb(197, 197, 197);
 }
+
 .testimonals::after{
     content: "";
     position: absolute;
@@ -14,6 +15,7 @@
     background-color: var(--color2);
     opacity: 0.8;
 }
+
 .testimonals h3{
     color: white;
     position: relative;
@@ -21,6 +23,7 @@
     display: inline-block;
     margin-bottom: 2rem;
 }
+
 .testimonals h3::after{
     content:"";
     position: absolute ;
@@ -30,7 +33,9 @@
     height: 5px;
     background-color: var(--color1);
     border-radius: 0.2rem;
+
 }
+
 .swiper-pagination-bullet-active {
     background: var(--color1) !important;
 }

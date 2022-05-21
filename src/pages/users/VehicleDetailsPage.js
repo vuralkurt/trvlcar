@@ -3,7 +3,9 @@ import PageHeader from '../../components/users/common/page-header/page-header'
 
 const VehicleDetailsPage = () => {
   return (
-    <PageHeader title="Vehicles Details" />
+    <>
+    <PageHeader title="Vehicle Details"/>
+    </>
   )
 }
 

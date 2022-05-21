@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/css/style.css"
 import reportWebVitals from './reportWebVitals';
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/css/style.css";
+import "react-toastify/dist/ReactToastify.min.css";
+import "alertifyjs/build/css/alertify.min.css";
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />

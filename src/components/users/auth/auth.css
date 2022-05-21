@@ -1,3 +1,4 @@
+
 .auth div[class^="col"]:first-child{
     height: 100vh;
     background-image: url("../../../assets/img/bg/login-bg.jpg");
@@ -41,4 +42,10 @@
 
 .auth div[class^="col"]:last-child{
     padding:4rem;
+}
+
+@media(max-width: 768px){
+    .auth div[class^="col"]:first-child{
+        height: 100px;
+    }
 }

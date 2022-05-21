@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Testimonal from "./testimonal";
 import Counters from "./counters";
+
 const Testimonals = () => {
   return (
     <section className="testimonals">
@@ -29,11 +30,12 @@ const Testimonals = () => {
             </Swiper>
           </Col>
           <Col md={6}>
-           <Counters/>
+            <Counters/>
           </Col>
         </Row>
       </Container>
     </section>
   );
 };
+
 export default Testimonals;
