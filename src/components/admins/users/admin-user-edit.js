@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import {
@@ -13,6 +13,13 @@ import {
 
 import MaskedInput from "react-maskedinput";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  deleteUser,
+  getUser,
+  updateUser,
+} from "../../../api/admin-user-service";
+import { toast } from "react-toastify";
+import alertify from "alertifyjs";
 
 const AdminUserEdit = () => {
   const [initialValues, setInitialValues] = useState({
@@ -24,10 +31,12 @@ const AdminUserEdit = () => {
     zipCode: "",
     username: "",
     password: "",
-    roles: ["Customer"],
+    roles: [],
     builtIn: false,
   });
 
+
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const { userId } = useParams();
@@ -43,8 +52,24 @@ const AdminUserEdit = () => {
     roles: Yup.array().required("Please select a role"),
   });
 
-  const onSubmit = (values) => {
-               
+  const onSubmit = async (values) => {
+    setSaving(true);
+
+    const data = { ...values };
+
+    if (!data.password) {
+      delete data.password;
+    }
+
+    try {
+      await updateUser(userId, data);
+      toast("User was updated successfully");
+    } catch (err) {
+      console.log(err);
+      toast(err.response.data.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const formik = useFormik({
@@ -54,9 +79,47 @@ const AdminUserEdit = () => {
     onSubmit,
   });
 
-  
+  const loadData = async () => {
+    try {
+      const resp = await getUser(userId);
+      console.log(resp.data);
+      setInitialValues(resp.data);
+    } catch (err) {
+      console.log(err);
+      toast(err.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
- 
+  const removeUser = async () => {
+    setDeleting(true);
+    try {
+      await deleteUser(userId);
+      toast("User was deleted successfully");
+      navigate(-1);
+    } catch (err) {
+      console.log(err);
+      toast(err.response.data.message);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  const handleDelete = () => {
+    alertify.confirm(
+      "Deleting",
+      "Are you sure want to delete?",
+      () => {
+        removeUser();
+      },
+      () => {}
+    );
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <Form noValidate onSubmit={formik.handleSubmit}>
@@ -93,7 +156,7 @@ const AdminUserEdit = () => {
             type="text"
             placeholder="Enter phone number"
             as={MaskedInput}
-            mask="(111) 111-11111"
+            mask="(111) 111-1111"
             {...formik.getFieldProps("phoneNumber")}
             isInvalid={!!formik.errors.phoneNumber}
           />
@@ -160,7 +223,6 @@ const AdminUserEdit = () => {
               label="Customer"
               type="checkbox"
               name="roles"
-              id="customer"
               value="Customer"
               checked={formik.values.roles.includes("Customer")}
               onChange={formik.handleChange}
@@ -170,7 +232,6 @@ const AdminUserEdit = () => {
               label="Admin"
               type="checkbox"
               name="roles"
-              id="admin"
               value="Administrator"
               checked={formik.values.roles.includes("Administrator")}
               onChange={formik.handleChange}
@@ -207,6 +268,7 @@ const AdminUserEdit = () => {
                 type="button"
                 variant="danger"
                 disabled={deleting}
+                onClick={handleDelete}
               >
                 {deleting && (
                   <Spinner animation="border" variant="light" size="sm" />
